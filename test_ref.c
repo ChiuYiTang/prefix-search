@@ -131,8 +131,12 @@ int main(int argc, char **argv)
             t2 = tvgetf();
             if (res) {
                 printf("  %s - searched prefix in %.6f sec\n\n", word, t2 - t1);
-                for (int i = 0; i < sidx; i++)
-                    printf("suggest[%d] : %s\n", i, sgl[i]);
+                for (int i = 0; i < sidx; i++) {
+                    char *flag = sgl[i] + strlen(sgl[i]) - 1;
+                    if(*flag == ',')
+                        printf("suggest[%d] for CITY : %s\n", i, sgl[i]);
+                    else printf("suggest[%d] for COUNTRY: %s\n", i, sgl[i]);
+                }
             } else
                 printf("  %s - not found\n", word);
             break;
